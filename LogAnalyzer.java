@@ -1,3 +1,4 @@
+//juan jimenez
 /**
  * Read web server data and analyse hourly access patterns.
  * 
