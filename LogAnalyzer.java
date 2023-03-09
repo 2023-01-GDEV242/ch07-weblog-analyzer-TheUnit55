@@ -1,5 +1,5 @@
-//juan jimenez
-//16,18,19
+//Juan Jimenez
+//19
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -10,8 +10,11 @@ public class LogAnalyzer
 {
     // Where to calculate the hourly access counts.
     private int[] hourCounts;
+    private int[] dayCounts;
+    private int[] monthCounts;
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
+    
 
     //7.12 Modified LogAnalzer so it can takes strings name of the log. public 
     // LogAnalyzer(String LogName), reader = new LogfileReader(LogName)
@@ -23,6 +26,8 @@ public class LogAnalyzer
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
+        dayCounts = new int[28];
+        monthCounts = new int[12];
         // Create the reader to obtain the data.
         reader = new LogfileReader(LogName);
     }
@@ -69,14 +74,20 @@ public class LogAnalyzer
     }
     
     
-    //7.16
+    //7.16 add public int quietestHour() method
+    //intitalize quietestHour as zero
+    //forloop that intitalizes hour as 1 and will loop until hour is greater 
+    //then hourCounts length and has a increment of hour
+    //if statement that when hour is less than quietesthour then it becomes
+    // the new value of hour and then returns quietestHour with the new value
+    //log 1 said 2 is the quietest and log 2 said 9
     public int quietestHour()
     {
         int quietestHour = 0;
         
         for(int hour = 1; hour < hourCounts.length; hour++) 
         {
-            if(hourCounts[hour] < hourCounts[quietestHour]) 
+            if(hourCounts[hour] > hourCounts[quietestHour]) 
             {
                 quietestHour = hour;
             }
@@ -85,7 +96,15 @@ public class LogAnalyzer
         return quietestHour;
     }
     
-    //7.18
+    //7.18 add public int busiestTwoHourPeriod() method
+    //intialize busiestPeriod and busiestPeriodCount as zero
+    //for loop that intialize hour as zero and will loop until hour is greater
+    //than hourCounts.length-1 with an increment of hour
+    //intialize periodCount as type int of hourCounts [hour] and adds [hour+1]
+    //if statement of if periodCount is greater thab busiestPeriodCount then
+    //busiestPeriod is the current hour and BusiestPeriodCount is now period
+    //count and returns busiestPeriod with the new value
+    //log 1 said hour zero was busiesttwoHour and log 2 said 7
     public int busiestTwoHourPeriod()
     {
         int busiestPeriod = 0;
@@ -104,7 +123,98 @@ public class LogAnalyzer
         return busiestPeriod;
     }
     
+    //7.19 quietestDay, busiestDay, TotalAccessesPerMonth, QuietestMonth,
+    //busiestMonth, averageAccessesPerMonth
     
+    public int quietestDay()
+    {
+        int quietestDay = 0;
+        
+        for(int day = 1; day < dayCounts.length; day++) 
+        {
+            if(dayCounts[day] < dayCounts[quietestDay]) 
+            {
+                quietestDay = day;
+            }
+        }
+        
+        return quietestDay;
+    }
+    
+        public int busiestDay()
+    {
+        int busiestDay = 0;
+        
+        for(int day = 1; day < dayCounts.length; day++) 
+        {
+            if(dayCounts[day] > dayCounts[busiestDay]) 
+            {
+                busiestDay = day;
+            }
+        }
+        
+        return busiestDay;
+    }
+    
+    public int quietestMonth()
+    {
+        int quietestMonth = 0;
+        
+        for(int Month = 1; Month < monthCounts.length; Month++) 
+        {
+            if(monthCounts[Month] < monthCounts[quietestMonth]) 
+            {
+                quietestMonth = Month;
+            }
+        }
+        
+        return quietestMonth;
+    }
+    
+        public int busiestMonth()
+    {
+        int busiestMonth = 0;
+        
+        for(int Month = 1; Month < monthCounts.length; Month++) 
+        {
+            if(monthCounts[Month] > monthCounts[busiestMonth]) 
+            {
+                busiestMonth = Month;
+            }
+        }
+        
+        return busiestMonth;
+    }
+    
+    public int totalAccessesPerMonth()
+    {
+        int total = 0;
+        
+        for(int monthCount : monthCounts) 
+        {
+            total = total + monthCount;    
+            
+        }
+        
+        return total;
+    }
+    
+    public int averageAccessesPerMonth()
+    {
+        int totalAPM = 0;
+        int total = 0;
+        
+        for(int monthCount : monthCounts) 
+        {
+            totalAPM = totalAPM + monthCount;    
+            
+            total = totalAPM / monthCounts.length;
+        }
+        System.out.println("Average accesses per month: " + total );
+        return total;
+    }
+     
+    //
     /**
      * Analyze the hourly access data from the log file.
      */
@@ -117,6 +227,24 @@ public class LogAnalyzer
         }
     }
 
+    public void analyzeDailyData()
+    {
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int day = entry.getDay();
+            dayCounts[day]++;
+        }
+    }
+    
+    public void analyzeMonthlyData()
+    {
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int month = entry.getMonth();
+            monthCounts[month]++;
+        }
+    }
+    
     /**
      * Print the hourly counts.
      * These should have been set with a prior

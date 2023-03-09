@@ -143,6 +143,7 @@ public class LogfileReader implements Iterator<LogEntry>
         }
     }
 
+    //5 year log file added data entry 1-5
     /**
      * Provide a sample of simulated data.
      * NB: To simplify the creation of this data, no
@@ -153,9 +154,13 @@ public class LogfileReader implements Iterator<LogEntry>
     {
         LogfileCreator creator = new LogfileCreator();
         // How many simulated entries we want.
-        int numEntries = 100;
+        int numEntries = 1000;
         for(int i = 0; i < numEntries; i++) {
-            data.add(creator.createEntry());
+            data.add(creator.createEntry1());
+            data.add(creator.createEntry2());
+            data.add(creator.createEntry3());
+            data.add(creator.createEntry4());
+            data.add(creator.createEntry5());
         }
     }
 }

@@ -33,7 +33,7 @@ public class LogfileCreator
             try (FileWriter writer = new FileWriter(filename)) {
                 LogEntry[] entries = new LogEntry[numEntries];
                 for(int i = 0; i < numEntries; i++) {
-                    entries[i] = createEntry();
+                    entries[i] = createEntry1();
                 }
                 Arrays.sort(entries);
                 for(int i = 0; i < numEntries; i++) {
@@ -51,19 +51,64 @@ public class LogfileCreator
         return success;
     }
     
+    //added entry 1-5 for 5 year 2015-2019 logfile
     /**
      * Create a single (random) entry for a log file.
      * @return A log entry containing random data.
      */
-    public LogEntry createEntry()
+    public LogEntry createEntry1()
     {
-        int year = 2016;
+    int year = 2015;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
-        int day = 1 + rand.nextInt(28);
+            int day = 1 + rand.nextInt(28);
         int hour = rand.nextInt(24);
         int minute = rand.nextInt(60);
-        return new LogEntry(year, month, day, hour, minute);
+        return new LogEntry(year, month, day, hour, minute);  
+    
     }
-
-}
+    
+    public LogEntry createEntry2()
+    {
+    int year = 2016;
+        int month = 1 + rand.nextInt(12);
+        // Avoid the complexities of days-per-month.
+            int day = 1 + rand.nextInt(28);
+        int hour = rand.nextInt(24);
+        int minute = rand.nextInt(60);
+        return new LogEntry(year, month, day, hour, minute); 
+    }
+    
+    public LogEntry createEntry3()
+    {
+    int year = 2017;
+        int month = 1 + rand.nextInt(12);
+        // Avoid the complexities of days-per-month.
+            int day = 1 + rand.nextInt(28);
+        int hour = rand.nextInt(24);
+        int minute = rand.nextInt(60);
+        return new LogEntry(year, month, day, hour, minute);  
+    }
+    
+    public LogEntry createEntry4()
+    {
+    int year = 2018;
+        int month = 1 + rand.nextInt(12);
+        // Avoid the complexities of days-per-month.
+            int day = 1 + rand.nextInt(28);
+        int hour = rand.nextInt(24);
+        int minute = rand.nextInt(60);
+        return new LogEntry(year, month, day, hour, minute);  
+    }
+    
+    public LogEntry createEntry5()
+    {
+    int year = 2019;
+        int month = 1 + rand.nextInt(12);
+        // Avoid the complexities of days-per-month.
+            int day = 1 + rand.nextInt(28);
+        int hour = rand.nextInt(24);
+        int minute = rand.nextInt(60);
+        return new LogEntry(year, month, day, hour, minute);  
+    }}
+    
