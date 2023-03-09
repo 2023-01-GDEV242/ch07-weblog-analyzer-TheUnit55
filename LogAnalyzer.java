@@ -1,5 +1,5 @@
 //Juan Jimenez
-//19
+
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -8,7 +8,7 @@
  */
 public class LogAnalyzer
 {
-    // Where to calculate the hourly access counts.
+    // Where to calculate the hourly, daily and monthly access counts.
     private int[] hourCounts;
     private int[] dayCounts;
     private int[] monthCounts;
@@ -23,7 +23,7 @@ public class LogAnalyzer
      */
     public LogAnalyzer(String LogName)
     { 
-        // Create the array object to hold the hourly
+        // Create the array object to hold the hourly. daily and monthly
         // access counts.
         hourCounts = new int[24];
         dayCounts = new int[28];
@@ -126,6 +126,11 @@ public class LogAnalyzer
     //7.19 quietestDay, busiestDay, TotalAccessesPerMonth, QuietestMonth,
     //busiestMonth, averageAccessesPerMonth
     
+    //intitalize quietestDay as zero
+    //forloop that intitalizes day as 1 and will loop until day is greater 
+    //then dayCounts length and has a increment of day
+    //if statement that when day is less than quietestDay then it becomes
+    // the new value of day and then returns quietestDay with the new value
     public int quietestDay()
     {
         int quietestDay = 0;
@@ -141,6 +146,12 @@ public class LogAnalyzer
         return quietestDay;
     }
     
+    //int busiestDay = 0 to intialize it as zero
+    //for loop that intiallizes day as 1 with a type int, day < dayCounts.
+    //length for when day is less it will loop until it is the same value of
+    //dayCounts.length and has an increment of the value of day with ++
+    //if statement that changes buisestDay into Day when HourDay[Day] is
+    //greater that [busiestDay] and then returns the new value of busiestDay
         public int busiestDay()
     {
         int busiestDay = 0;
@@ -156,6 +167,11 @@ public class LogAnalyzer
         return busiestDay;
     }
     
+    //intitalize quietestMonth as zero
+    //forloop that intitalizes Month as 1 and will loop until month is greater 
+    //then monthCounts length and has a increment of month 
+    //if statement that when month is less than quietestMonth then it becomes
+    // the new value of month and then returns quietestMonth with the new value
     public int quietestMonth()
     {
         int quietestMonth = 0;
@@ -171,6 +187,12 @@ public class LogAnalyzer
         return quietestMonth;
     }
     
+    //int busiestMonth = 0 to intialize it as zero
+    //for loop that intiallizes month as 1 with a type int, month < monthCounts.
+    //length for when Month is less it will loop until it is the same value of
+    //monthCounts.length and has an increment of the value of month with ++
+    //if statement that changes buisestMonth into month when monthCount[Month] 
+    //is greater that [busiestHour] and then returns the new value of busiestHour
         public int busiestMonth()
     {
         int busiestMonth = 0;
@@ -185,7 +207,6 @@ public class LogAnalyzer
         
         return busiestMonth;
     }
-    
     public int totalAccessesPerMonth()
     {
         int total = 0;
@@ -199,6 +220,11 @@ public class LogAnalyzer
         return total;
     }
     
+    //for method that shows average acceses per month
+    //intialized totalAPM and total to zero
+    //gets the number of accesses with totalAPM and to get the average total
+    //divides totalAPM by the length of all months which is 12 and then 
+    //prints out the average which is held in total
     public int averageAccessesPerMonth()
     {
         int totalAPM = 0;
@@ -214,7 +240,7 @@ public class LogAnalyzer
         return total;
     }
      
-    //
+    //analyzes data for hourly
     /**
      * Analyze the hourly access data from the log file.
      */
@@ -227,6 +253,8 @@ public class LogAnalyzer
         }
     }
 
+    //created a data analyzer for daily data for busiest day and quietestday
+    //methods
     public void analyzeDailyData()
     {
         while(reader.hasNext()) {
@@ -236,6 +264,8 @@ public class LogAnalyzer
         }
     }
     
+    //created a data analyzer for monthly data for busiest month and quietest
+    //month methods
     public void analyzeMonthlyData()
     {
         while(reader.hasNext()) {
