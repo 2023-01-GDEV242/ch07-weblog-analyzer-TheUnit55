@@ -1,5 +1,5 @@
 //Juan Jimenez
-
+//jj
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -73,7 +73,8 @@ public class LogAnalyzer
         return busiestHour;
     }
     
-    
+    //revisted quietestHour, before did not display the quietest hour becuase I had the less-than in the if 
+    //statement in the wrong way but it now displays quietestHour correctly.
     //7.16 add public int quietestHour() method
     //intitalize quietestHour as zero
     //forloop that intitalizes hour as 1 and will loop until hour is greater 
@@ -87,7 +88,7 @@ public class LogAnalyzer
         
         for(int hour = 1; hour < hourCounts.length; hour++) 
         {
-            if(hourCounts[hour] > hourCounts[quietestHour]) 
+            if(hourCounts[hour] < hourCounts[quietestHour]) 
             {
                 quietestHour = hour;
             }
@@ -126,6 +127,7 @@ public class LogAnalyzer
     //7.19 quietestDay, busiestDay, TotalAccessesPerMonth, QuietestMonth,
     //busiestMonth, averageAccessesPerMonth
     
+    //revisted 
     //intitalize quietestDay as zero
     //forloop that intitalizes day as 1 and will loop until day is greater 
     //then dayCounts length and has a increment of day
@@ -239,42 +241,66 @@ public class LogAnalyzer
         System.out.println("Average accesses per month: " + total );
         return total;
     }
-     
+    
+    //revision of analyzeHourlyData()
+    //for each Log entry returned by the reader the code is in a loop to continue as long as the log has more 
+    //entries to process, it then checks if the entry is not null and then gets the hour entry from getHour method.
+    //and then it increments the counter in the hourCounts array.
     //analyzes data for hourly
     /**
      * Analyze the hourly access data from the log file.
      */
     public void analyzeHourlyData()
     {
-        while(reader.hasNext()) {
-            LogEntry entry = reader.next();
-            int hour = entry.getHour();
-            hourCounts[hour]++;
-        }
+    while (reader.hasNext()) 
+    {
+    LogEntry entry = reader.next();
+    if (entry != null) 
+    {
+        int hour = entry.getHour();
+        hourCounts[hour]++;
     }
+    }}
 
-    //created a data analyzer for daily data for busiest day and quietestday
-    //methods
+    //revision of analyzeDailyData()
+    //for each Log entry returned by the reader the code is in a loop to continue as long as the log has more 
+    //entries to process, it then checks if the entry is not null and then gets the day entry form getDay method.
+    //and it increments the counter for the dayCounts array.
+    //for a data analyzer for daily data for busiest day and quietestday
+    //analyzes data for daily 
     public void analyzeDailyData()
     {
-        while(reader.hasNext()) {
-            LogEntry entry = reader.next();
-            int day = entry.getDay();
-            dayCounts[day]++;
-        }
+        while (reader.hasNext()) 
+        {
+    LogEntry entry = reader.next();
+    if (entry != null) 
+    {
+        int day = entry.getDay();
+        dayCounts[day]++;
     }
+    }}
     
+    //revision of analyzeMonthlyData()
+    //for each Log entry returned by the reader the code is in a loop to continue as long as the log has more 
+    //entries to process, it then checks if the entry is not null and then gets the month entry form getMonth method.
+    //and it increments the counter for the monthCounts array.
     //created a data analyzer for monthly data for busiest month and quietest
-    //month methods
+    //analyzes data for monthly
     public void analyzeMonthlyData()
     {
-        while(reader.hasNext()) {
-            LogEntry entry = reader.next();
-            int month = entry.getMonth();
-            monthCounts[month]++;
-        }
+        while (reader.hasNext()) 
+        {
+    LogEntry entry = reader.next();
+    if (entry != null) 
+    {
+        int month = entry.getMonth();
+        monthCounts[month]++;
     }
+    }}
     
+    //printHourlyCounts that prints a header of HR: Count with the System.out.println
+    //the for loop will print out the hour and will loop until the length of hoursCount is complete which is 24
+    //in the end it should display all the hours and their data
     /**
      * Print the hourly counts.
      * These should have been set with a prior
@@ -287,6 +313,30 @@ public class LogAnalyzer
             System.out.println(hour + ": " + hourCounts[hour]);
         }
     }
+    
+    //added a method that displays all the days and data
+    //printDailyCounts that prints a header of Day: Count with the System.out.println
+    //the for loop will print out the day and will loop until the length of dayCount is complete which is 28
+    //in the end it should display all the days and their data
+    public void printDailyCounts()
+    {
+        System.out.println("Day: Count");
+        for(int day = 0; day < dayCounts.length; day++) {
+            System.out.println(day + ": " + dayCounts[day]);
+        }
+    }
+    
+    //added a method that displays all the months and data
+    //printMonthlyCounts that prints a header of Month: Count with the System.out.println
+    //the for loop will print out the month and will loop until the length of monthCount is complete which is 12
+    //in the end it should display all the months and their data
+    public void printMonthlyCounts()
+    {
+        System.out.println("Month: Count");
+        for(int month = 0; month < monthCounts.length; month++) {
+            System.out.println(month + ": " + monthCounts[month]);
+        }
+    } 
     
     /**
      * Print the lines of data read by the LogfileReader

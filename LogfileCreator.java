@@ -58,7 +58,7 @@ public class LogfileCreator
      */
     public LogEntry createEntry1()
     {
-    int year = 2015;
+        int year = 2015;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
             int day = 1 + rand.nextInt(28);
@@ -70,7 +70,7 @@ public class LogfileCreator
     
     public LogEntry createEntry2()
     {
-    int year = 2016;
+        int year = 2016;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
             int day = 1 + rand.nextInt(28);
@@ -81,7 +81,7 @@ public class LogfileCreator
     
     public LogEntry createEntry3()
     {
-    int year = 2017;
+        int year = 2017;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
             int day = 1 + rand.nextInt(28);
@@ -89,10 +89,10 @@ public class LogfileCreator
         int minute = rand.nextInt(60);
         return new LogEntry(year, month, day, hour, minute);  
     }
-    
+       
     public LogEntry createEntry4()
     {
-    int year = 2018;
+        int year = 2018;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
             int day = 1 + rand.nextInt(28);
@@ -103,7 +103,7 @@ public class LogfileCreator
     
     public LogEntry createEntry5()
     {
-    int year = 2019;
+        int year = 2019;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
             int day = 1 + rand.nextInt(28);

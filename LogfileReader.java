@@ -141,6 +141,7 @@ public class LogfileReader implements Iterator<LogEntry>
         for(LogEntry entry : entries) {
             System.out.println(entry);
         }
+        
     }
 
     //5 year log file added data entry 1-5
